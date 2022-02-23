@@ -1,0 +1,109 @@
+<div class="container">
+	<div class="row justify-content-md-center">
+		<div class="col-md-8 mt-5">
+			
+			<form [formGroup]="form" (ngSubmit)="onSubmit()">
+				<!-- <div class="form-group">
+					<label>Product Name</label>
+					 <input type="text" class="form-control" [class.is-invalid]="f['name'].invalid" formControlName="name">
+					<div class="invalid-feedback mt-2" role="alert">
+						Product name is required.
+					</div>
+				</div>  -->
+
+				<div class="form-group" *ngIf="!isLoadingCategory; else loadingTmpl">
+					<label>Product Category <strong>(Form Array)</strong></label>
+					<div class="tabs">
+					<div class="tab">
+					<input type="checkbox" class="cbox" id="chck1" />
+					<label class="tab-label" for="chck1">Heading Text</label>
+					<div class="tab-content">
+						<!-- Place your detailed contents here. -->
+						<div class="checkbox-group" [class.is-invalid]="f['categoriesFormArr'].invalid">
+						<div *ngFor="let control of categoriesFormArr?.controls; let i = index" class="checkbox">
+							<label><input type="checkbox" [formControl]="control" /> 
+              {{ categories[i]?.title }}
+              </label>
+					
+					</div>
+		</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+					<!-- <div class="checkbox-group" [class.is-invalid]="f['categoriesFormArr'].invalid">
+						<div *ngFor="let control of categoriesFormArr?.controls; let i = index" class="checkbox">
+							<label><input type="checkbox" [formControl]="control" /> 
+              {{ categories[i]?.title }}
+              </label>
+					
+					</div>
+		</div> -->
+		
+					<!-- <div class="invalid-feedback" role="alert">
+						FormArray - At least one category must be selected.
+					</div>
+					<div class="alert alert-primary mt-2">
+						{{ categoriesFormArraySelectedIds | json }}
+					</div> -->
+			
+			
+
+				<hr>
+
+
+
+
+				<div class="form-group" *ngIf="!isLoadingCategory; else loadingTmpl">
+					<label>Product Category <strong>(Form Group)</strong></label>
+					<div class="tabs">
+					<div class="tab">
+					<input type="checkbox" class="cbox" id="chck2" />
+					<label class="tab-label" for="chck2">Heading Text</label>
+					<div class="tab-content">
+
+					<div class="checkbox-group" [class.is-invalid]="f['categoriesFormGroup'].invalid">
+						<div *ngFor="let item of categories; let i = index" class="checkbox">
+							<label><input type="checkbox" [formControl]="categoriesFormGroup?.controls[item.id]" /> {{ categories[i]?.title }}
+              </label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+					<!-- <div class="invalid-feedback" role="alert">
+						FormGroup - At least one category must be selected.
+					</div>
+					<div class="alert alert-primary mt-2">
+						{{ categoriesFormGroupSelectedIds | json}}
+					</div> -->
+				</div>
+			
+
+				<hr />
+				<!-- <h3>Form Value</h3>
+				<div class="mb-2">
+					<pre>{{ form.value | json }}</pre>
+				</div> -->
+			
+
+				<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+			</form>
+		</div>
+	</div>
+  <hr />
+  <!-- For clarity and consistency when building UI, please read this <a target="_blank"
+	href="https://github.com/trungk18/front-end-editorial-style-guide">front-end-editorial-style-guide</a> -->
+</div>
+
+
+
+<ng-template #loadingTmpl>
+	<div>Loading...</div>
+</ng-template>
